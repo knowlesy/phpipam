@@ -111,6 +111,13 @@ Create the Container (remember to upload the file)
     --resource-group $MyResourceGroup \
     --file deploy-aci.yaml
 
+Get the A record (remember to update the yml file)
+
+![image](https://github.com/knowlesy/phpipam/assets/20459678/f41c799d-fe29-4dd4-955f-d0679b0224c7)
+
+![image](https://github.com/knowlesy/phpipam/assets/20459678/a24c98fc-48a6-4b20-8f4c-513fdf696bdd)
+
+
 Get the IP of the container 
 
     az container list --query "[?contains(name, 'phpipam')].[ipAddress.ip]" --output tsv
