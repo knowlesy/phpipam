@@ -1,0 +1,57 @@
+apiVersion: 2021-07-01
+location: uksouth
+name: phpipam
+properties:
+  containers:
+  - name: phpipam-web
+    properties:
+      image: phpipam/phpipam-www
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      environmentVariables:
+      - name: TZ
+        value: Europe/London
+      - name: IPAM_DATABASE_HOST
+        value: <replace_with_server_name_mysql>.private.mysql.database.azure.com 
+      - name: IPAM_DATABASE_USER
+        value: mylogin
+      - name: IPAM_DATABASE_PASS
+        secureValue: <replace_with_server_admin_password> 
+      - name: IPAM_DATABASE_NAM
+        value: phpacidemo-mysql
+      ports:
+      - port: 80
+        protocol: TCP
+  - name: phpipam-cron
+    properties:
+      image: phpipam/phpipam-cron
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      environmentVariables:
+      - name: TZ
+        value: Europe/London
+      - name: IPAM_DATABASE_HOST
+        value: <replace_with_server_name_mysql>.private.mysql.database.azure.com
+      - name: IPAM_DATABASE_USER
+        value: myadmin
+      - name: IPAM_DATABASE_PASS
+        secureValue: <replace_with_server_admin_password> 
+      - name: IPAM_DATABASE_NAM
+        value: phpacidemo-mysql
+      - name: SCAN_INTERVAL
+        value: 1h
+  subnetIds:
+    - id: <replace_with_subnet_id>
+      name: default
+  restartPolicy: OnFailure
+  osType: Linux
+  ipAddress:
+    type: Private
+    ports:
+    - protocol: tcp
+      port: 80
+type: Microsoft.ContainerInstance/containerGroups
