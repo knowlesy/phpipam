@@ -17,7 +17,11 @@ Deploying phpIpam to Azure with azure CLI, using Azure Container instances, mySq
 
 * [Flexible Server TLS](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
 
+This is all done via the Azure CLI Shell
 
+Clone or create the yaml file in this repo and modify as per instructions 
+
+Remember to clean up everything at the end. 
 
 Variables
 
